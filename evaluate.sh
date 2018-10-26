@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python linear-color-transfer.py --target_image styles/fireemblem32.png --source_image input/content.png --output_image output/style_colored.png
+python linear-color-transfer.py --target_image styles/mattcosby.jpg --source_image input/content.png --output_image output/style_colored.png
 
 python lum-transfer.py --content_image input/content.png --style_image output/style_colored.png --cp_mode lum --output_style_image output/style_lum.png --output_content_image output/content_lum.png --org_content input/content.png
 
