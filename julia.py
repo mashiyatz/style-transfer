@@ -1,6 +1,17 @@
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import argparse
+
+parser = argparse.ArgumentParser(description='Julia with TensorFlow.')
+parser.add_argument("--c", type=complex, default=-0.835 - 0.2321 * 1j)
+parser.add_argument("--bg_ratio", type=tuple, default=(4, 2.5, 1))
+parser.add_argument("--ratio", type=tuple, default=(0.9, 0.9, 0.9))
+parser.add_argument("--width", type=int, default=1000)
+
+
+args = parser.parse_args()
+
 
 R = 4
 ITER_NUM = 200
@@ -46,10 +57,10 @@ if __name__ == '__main__':
     end_x = 1.9
     start_y = -1.1  # y range
     end_y = 1.1
-    width = 1200  # image width
-    c = -0.835 - 0.2321 * 1j
-    bg_ratio = (4, 2.5, 1)
-    ratio = (0.9, 0.9, 0.9)
+    width = args.width  # image width
+    c = args.c
+    bg_ratio = args.bg_ratio
+    ratio = args.ratio
 
     step = (end_x - start_x) / width
     Y, X = np.mgrid[start_y:end_y:step, start_x:end_x:step]

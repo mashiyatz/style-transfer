@@ -1,6 +1,19 @@
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import argparse
+
+parser = argparse.ArgumentParser(description='Mandelbrot with TensorFlow.')
+parser.add_argument("--start_x", type=float, default=0.275)
+parser.add_argument("--end_x", type=float, default=0.28)
+parser.add_argument("--start_y", type=float, default=0.006)
+parser.add_argument("--end_y", type=float, default=0.01)
+parser.add_argument("--width", type=int, default=1000)
+parser.add_argument("--ratio1", type=float, default=0.9)
+parser.add_argument("--ratio2", type=float, default=0.6)
+parser.add_argument("--ratio3", type=float, default=0.6)
+
+args = parser.parse_args()
 
 R = 4
 ITER_NUM = 200
@@ -42,12 +55,14 @@ def gen_mandelbrot(Z, ratio1, ratio2, ratio3):
     return Image.fromarray(np.uint8(img_array * 255))
 
 if __name__ == '__main__':
-    start_x = 0.275  # x range
-    end_x = 0.28
-    start_y = 0.006  # y range
-    end_y = 0.01
-    width = 1000
-    ratio1, ratio2, ratio3 = 0.9, 0.6, 0.6
+    start_x = args.start_x  # x range
+    end_x = args.end_x
+    start_y = args.start_y  # y range
+    end_y = args.end_y
+    width = args.width
+    ratio1 = args.ratio1
+    ratio2 = args.ratio2
+    ratio3 = args.ratio3
 
     step = (end_x - start_x) / width
     Y, X = np.mgrid[start_y:end_y:step, start_x:end_x:step]
