@@ -4,10 +4,15 @@ from PIL import Image
 import argparse
 
 parser = argparse.ArgumentParser(description='Julia with TensorFlow.')
+parser.add_argument("--start_x", type=float, default=-1.9)
+parser.add_argument("--end_x", type=float, default=1.9)
+parser.add_argument("--start_y", type=float, default=-1.1)
+parser.add_argument("--end_y", type=float, default=1.1)
 parser.add_argument("--c", type=complex, default=-0.835 - 0.2321 * 1j)
 parser.add_argument("--bg_ratio", type=tuple, default=(4, 2.5, 1))
 parser.add_argument("--ratio", type=tuple, default=(0.9, 0.9, 0.9))
 parser.add_argument("--width", type=int, default=1000)
+parser.add_argument("--output", type=str, default='share/julia.png')
 
 
 args = parser.parse_args()
@@ -53,10 +58,10 @@ def gen_julia(Z, c, bg_ratio, ratio):
 
 
 if __name__ == '__main__':
-    start_x = -1.9  # x range
-    end_x = 1.9
-    start_y = -1.1  # y range
-    end_y = 1.1
+    start_x = args.start_x  # x range
+    end_x = args.end_x
+    start_y = args.start_y  # y range
+    end_y = args.end_y
     width = args.width  # image width
     c = args.c
     bg_ratio = args.bg_ratio
@@ -67,4 +72,4 @@ if __name__ == '__main__':
     Z = X + 1j * Y
 
     img = gen_julia(Z, c, bg_ratio, ratio)
-    img.save('julia.png')
+    img.save(args.output)

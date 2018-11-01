@@ -12,6 +12,7 @@ parser.add_argument("--width", type=int, default=1000)
 parser.add_argument("--ratio1", type=float, default=0.9)
 parser.add_argument("--ratio2", type=float, default=0.6)
 parser.add_argument("--ratio3", type=float, default=0.6)
+parser.add_argument("--output", type=str, default='share/mandelbrot.png')
 
 args = parser.parse_args()
 
@@ -68,4 +69,4 @@ if __name__ == '__main__':
     Y, X = np.mgrid[start_y:end_y:step, start_x:end_x:step]
     Z = X + 1j * Y
     img = gen_mandelbrot(Z, ratio1, ratio2, ratio3)
-    img.save('mandelbrot.png')
+    img.save(args.output)
